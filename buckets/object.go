@@ -5,6 +5,8 @@ import "io"
 type ObjectName string
 
 type ObjectMeta struct {
+	ObjectSum
+
 	Name ObjectName
 
 	Length int64
@@ -18,6 +20,11 @@ type ObjectData struct {
 	Closer io.Closer
 
 	Reader io.Reader
+}
+
+type ObjectSum struct {
+	Algorithm HashAlgorithm
+	Sum       []byte
 }
 
 type Object interface {
