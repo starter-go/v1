@@ -81,7 +81,11 @@ func TestMockObjectOperations(t *testing.T) {
 	}
 
 	// Test fetching non-existent object
-	_, _, err = obj.Fetch()
+	fetchContext := &buckets.FetchContext{
+		WantMeta: true,
+		WantData: true,
+	}
+	err = obj.Fetch(fetchContext)
 	if err != ErrObjectNotFound {
 		t.Errorf("Expected ErrObjectNotFound, got %v", err)
 	}
@@ -93,7 +97,11 @@ func TestMockObjectOperations(t *testing.T) {
 	data := &buckets.ObjectData{
 		Length: 100,
 	}
-	err = obj.Put(meta, data)
+	putContext := &buckets.PutContext{
+		Meta: meta,
+		Data: data,
+	}
+	err = obj.Put(putContext)
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}

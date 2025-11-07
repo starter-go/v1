@@ -39,9 +39,9 @@ type Object interface {
 
 	GetBucket() Bucket
 
-	Fetch() (*ObjectMeta, *ObjectData, error)
+	Fetch(ctx *FetchContext) error
 
-	Put(meta *ObjectMeta, data *ObjectData) error
+	Put(ctx *PutContext) error
 
 	Remove() error
 

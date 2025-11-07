@@ -105,9 +105,11 @@ func (o *mockObject) GetBucket() buckets.Bucket {
 }
 
 // Fetch retrieves the object data
-func (o *mockObject) Fetch() (*buckets.ObjectMeta, *buckets.ObjectData, error) {
+func (o *mockObject) Fetch(fc *buckets.FetchContext) error {
 	if o.data == nil {
-		return nil, nil, ErrObjectNotFound
+		err := ErrObjectNotFound
+		fc.Error = err
+		return err
 	}
 
 	meta := &buckets.ObjectMeta{
@@ -122,13 +124,17 @@ func (o *mockObject) Fetch() (*buckets.ObjectMeta, *buckets.ObjectData, error) {
 		Reader: nil, // In a real implementation, this would be a reader for the data
 	}
 
-	return meta, data, nil
+	fc.Meta = meta
+	fc.Data = data
+	return nil
 }
 
 // Put stores the object data
-func (o *mockObject) Put(meta *buckets.ObjectMeta, data *buckets.ObjectData) error {
+func (o *mockObject) Put(pc *buckets.PutContext) error {
 	// In a real implementation, we would read the data from the reader
 	// For this mock, we'll just store a placeholder
+
+	data := pc.Data
 	o.data = make([]byte, data.Length)
 	return nil
 }
