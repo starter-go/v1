@@ -7,8 +7,8 @@ import (
 
 const (
 	theModuleName     = "github.com/starter-go/v1/buckets"
-	theModuleVersion  = "buckets/v0.9.0"
-	theModuleRevision = 0
+	theModuleVersion  = "buckets/v0.9.1"
+	theModuleRevision = 1
 )
 
 func GetModuleInfo() string {
