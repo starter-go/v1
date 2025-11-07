@@ -1,6 +1,9 @@
 package buckets
 
-import "io"
+import (
+	"context"
+	"io"
+)
 
 type ObjectName string
 
@@ -28,6 +31,10 @@ type ObjectSum struct {
 }
 
 type Object interface {
+	GetContext() context.Context
+
+	WithContext(cc context.Context) Object
+
 	Name() ObjectName
 
 	GetBucket() Bucket

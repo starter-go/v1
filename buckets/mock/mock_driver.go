@@ -1,6 +1,7 @@
 package mock
 
 import (
+	"context"
 	"errors"
 
 	"github.com/starter-go/v1/buckets"
@@ -28,7 +29,7 @@ func (inst *TheMockDriver) Registration() *buckets.DriverRegistration {
 }
 
 // OpenBucket opens and returns a mock bucket
-func (inst *TheMockDriver) OpenBucket(ctx *buckets.Context) (buckets.Bucket, error) {
+func (inst *TheMockDriver) OpenBucket(ctx *buckets.BucketContext) (buckets.Bucket, error) {
 	return &mockBucket{
 		context: ctx,
 		objects: make(map[buckets.ObjectName]*mockObject),
@@ -37,7 +38,7 @@ func (inst *TheMockDriver) OpenBucket(ctx *buckets.Context) (buckets.Bucket, err
 
 // mockBucket is a mock implementation of the buckets.Bucket interface
 type mockBucket struct {
-	context *buckets.Context
+	context *buckets.BucketContext
 	objects map[buckets.ObjectName]*mockObject
 }
 
@@ -47,7 +48,12 @@ func (b *mockBucket) Close() error {
 }
 
 // GetContext returns the bucket context
-func (b *mockBucket) GetContext() *buckets.Context {
+func (b *mockBucket) GetContext() context.Context {
+	return b.context.Context
+}
+
+// GetContext returns the bucket context
+func (b *mockBucket) GetBucketContext() *buckets.BucketContext {
 	return b.context
 }
 
@@ -68,14 +74,29 @@ func (b *mockBucket) GetObject(name buckets.ObjectName) buckets.Object {
 
 // mockObject is a mock implementation of the buckets.Object interface
 type mockObject struct {
-	bucket *mockBucket
-	name   buckets.ObjectName
-	data   []byte
+	context context.Context
+	bucket  *mockBucket
+	name    buckets.ObjectName
+	data    []byte
 }
 
 // Name returns the object name
 func (o *mockObject) Name() buckets.ObjectName {
 	return o.name
+}
+
+// Name returns the object name
+func (o *mockObject) GetContext() context.Context {
+	return o.context
+}
+
+// Name returns the object name
+func (o *mockObject) WithContext(cc context.Context) buckets.Object {
+	if cc == nil {
+		return o
+	}
+	o.context = cc
+	return o
 }
 
 // GetBucket returns the parent bucket

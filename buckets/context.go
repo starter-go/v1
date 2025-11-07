@@ -1,11 +1,15 @@
 package buckets
 
-type Context struct {
+import "context"
+
+type BucketContext struct {
+	Context context.Context // the global-context
+
 	Driver Driver
 
 	DriverManager DriverManager
 
-	Config Configuration
+	Configuration Configuration
 
 	Bucket Bucket
 }

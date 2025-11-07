@@ -29,8 +29,8 @@ func TestMockDriverRegistration(t *testing.T) {
 
 func TestMockDriverOpenBucket(t *testing.T) {
 	driver := &TheMockDriver{}
-	ctx := &buckets.Context{
-		Config: buckets.Configuration{
+	ctx := &buckets.BucketContext{
+		Configuration: buckets.Configuration{
 			Driver: "mock",
 		},
 	}
@@ -45,7 +45,7 @@ func TestMockDriverOpenBucket(t *testing.T) {
 	}
 
 	// Test that we can get the context back
-	if bucket.GetContext() != ctx {
+	if bucket.GetBucketContext() != ctx {
 		t.Error("Expected to get the same context back")
 	}
 
@@ -62,8 +62,8 @@ func TestMockDriverOpenBucket(t *testing.T) {
 
 func TestMockObjectOperations(t *testing.T) {
 	driver := &TheMockDriver{}
-	ctx := &buckets.Context{
-		Config: buckets.Configuration{
+	ctx := &buckets.BucketContext{
+		Configuration: buckets.Configuration{
 			Driver: "mock",
 		},
 	}
