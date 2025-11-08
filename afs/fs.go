@@ -7,7 +7,7 @@ type FileSystem interface {
 
 	ListRoots() []Node
 
-	IO() FileSystemIO
+	GetIO() FileSystemIO
 }
 
 // FS 是 FileSystem 的别名

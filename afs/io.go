@@ -1,40 +1,11 @@
 package afs
 
-import "time"
+import (
+	"io"
+	"time"
+)
 
-// Options 包含几个通用的选项,对于不同的操作,某些字段可能是无效的
-type Options struct {
-
-	// 文件模式
-	Mode FileMode
-
-	// 读写标志位
-	Flag int
-
-	Owner UserID
-
-	Group GroupID
-
-	// 指示操作不要使用缓存
-	Reload bool
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-type FileSystemIO interface {
-	FileSystem() FileSystem
-
-	// file i/o
-
-	ReadFile(file File, p *Options) ([]byte, error)
-
-	WriteFile(file File, data []byte, p *Options) error
-
-	// make dir
-
-	Mkdir(dir Directory, p *Options) error
-
-	Mkdirs(dir Directory, p *Options) error
+type NodeIO interface {
 
 	// change (mode|owner|group)
 
@@ -51,23 +22,46 @@ type FileSystemIO interface {
 	SetUpdatedAt(node Node, at time.Time) error
 }
 
-////////////////////////////////////////////////////////////////////////////////
+type DirectoryIO interface {
 
-// NodeIO 为 Node 提供一组便捷的 IO 方法
-type NodeIO interface {
-	Node() Node
+	// make dir
 
-	ReadText(p *Options) (string, error)
+	Mkdir(dir Directory, p *Options) error
 
-	ReadBinary(p *Options) ([]byte, error)
+	Mkdirs(dir Directory, p *Options) error
+}
 
-	WriteText(text string, p *Options) error
+type FileIO interface {
 
-	WriteBinary(data []byte, p *Options) error
+	// file i/o
 
-	Mkdir(p *Options) error
+	ReadFile(file File, p *Options) ([]byte, error)
 
-	Mkdirs(p *Options) error
+	WriteFile(file File, data []byte, p *Options) error
+
+	// extends
+
+	ReadText(file File, p *Options) (string, error)
+
+	ReadBinary(file File, p *Options) ([]byte, error)
+
+	WriteText(file File, text string, p *Options) error
+
+	WriteBinary(file File, data []byte, p *Options) error
+
+	OpenReader(file File, p *Options) (io.ReadCloser, error)
+
+	OpenWriter(file File, p *Options) (io.WriteCloser, error)
+}
+
+type LinkIO interface {
+}
+
+type FileSystemIO interface {
+	DirectoryIO
+	FileIO
+	LinkIO
+	NodeIO
 }
 
 ////////////////////////////////////////////////////////////////////////////////

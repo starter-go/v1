@@ -1,18 +1,25 @@
 package afs
 
 type Node interface {
-	Name() string
 
-	Path() Path
+	// attributes
 
-	URI() URI
+	String() string
 
-	Parent() Directory
+	GetName() string
 
-	FileSystem() FileSystem
+	GetPath() Path
+
+	GetURI() URI
+
+	GetParent() Directory
+
+	GetFileSystem() FileSystem
 
 	IsDir() bool
+
 	IsFile() bool
+
 	IsLink() bool
 
 	Exists() bool
@@ -20,7 +27,7 @@ type Node interface {
 	// 如果 reload=1, 表示必须重新加载元信息，并把之前缓存的 meta 扔掉
 	GetMeta(opt *Options) Meta
 
-	IO() NodeIO
+	GetIO() FileSystemIO
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -28,11 +35,15 @@ type Node interface {
 type File interface {
 	Node
 
-	Size() FileSize
+	GetSize(reload bool) FileSize
 
-	NameSuffix() string
-	NameSuffixLower() string
-	NameSuffixUpper() string
+	// suffix
+
+	GetNameSuffix() string
+
+	GetNameSuffixLower() string
+
+	GetNameSuffixUpper() string
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -43,20 +54,24 @@ type Directory interface {
 	// list children:
 
 	ListNames() []string
+
 	ListPaths() []Path
+
 	ListNodes() []Node
 
-	GetChild(name PathElement) Node
-	GetHref(path Path) Node
+	// ref
 
-	Mkdir(opt *Options) error
-	Mkdirs(opt *Options) error
+	GetChild(name PathElement) Node
+
+	GetHref(path Path) Node
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 type Link interface {
 	Node
+
+	GetTarget() Node
 }
 
 ////////////////////////////////////////////////////////////////////////////////

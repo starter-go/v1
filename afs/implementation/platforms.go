@@ -4,7 +4,11 @@ import "github.com/starter-go/v1/afs"
 
 // 表示系统平台特殊的接口
 type PlatformAPI interface {
-	NormalizePath(path afs.Path) afs.Path
+	NormalizePath(path afs.Path) (afs.Path, afs.PathElementList, error)
+
+	NormalizePathEL(elements afs.PathElementList) (afs.Path, afs.PathElementList, error)
+
+	LoadMeta(node afs.Node) afs.Meta
 
 	ListRoots() []afs.Path
 }

@@ -11,11 +11,16 @@ type DriverBuilder struct {
 
 func (inst *DriverBuilder) Create() afs.Driver {
 
+	papi := inst.PlatformAPI
+	if papi == nil {
+		panic("libafs.DriverBuilder: PlatformAPI is nil")
+	}
+
 	ctx := new(implementation.Context)
 	driver := new(innerCommonDriver)
 	fs := new(innerCommonFS)
 	fapi := new(innerCommonFullAPIImpl)
-	papi := inst.PlatformAPI
+	fsio := new(innerCommonFSIO)
 
 	if papi == nil {
 		panic("DriverBuilder: PlatformAPI is nil")
@@ -25,6 +30,7 @@ func (inst *DriverBuilder) Create() afs.Driver {
 	ctx.FS = fs
 	ctx.PlatformAPI = papi
 	ctx.FullAPI = fapi
+	ctx.IO = fsio
 
 	return ctx.Driver
 }

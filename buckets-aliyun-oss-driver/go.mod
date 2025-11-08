@@ -4,6 +4,7 @@ go 1.23
 
 require (
 	github.com/aliyun/alibabacloud-oss-go-sdk-v2 v1.3.0 // indirect
-	github.com/starter-go/v1/buckets v0.9.1 // indirect
+	github.com/starter-go/base v0.9.11
+	github.com/starter-go/v1/buckets v0.9.2 // indirect
 	golang.org/x/time v0.4.0 // indirect
 )

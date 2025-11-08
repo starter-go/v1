@@ -14,19 +14,12 @@ func (inst *innerCommonFS) _impl() afs.FS {
 }
 
 func (inst *innerCommonFS) GetNode(path afs.Path) afs.Node {
-
-	api := inst.context.FullAPI
-	path = api.NormalizePath(path)
-
-	node := new(innerCommonNode)
-	node.context = inst.context
-	node.path = path
-	return node
+	nb := new(innerCommonNodeBuilder)
+	nb.init(path)
+	return nb.build()
 }
 
 func (inst *innerCommonFS) GetNodeWithURI(uri afs.URI) afs.Node {
-
-	// const prefix = "file:/"
 	api := inst.context.FullAPI
 	path := api.UriToPath(uri)
 	return inst.GetNode(path)
@@ -46,6 +39,6 @@ func (inst *innerCommonFS) ListRoots() []afs.Node {
 	return dst
 }
 
-func (inst *innerCommonFS) IO() afs.FileSystemIO {
+func (inst *innerCommonFS) GetIO() afs.FileSystemIO {
 	return inst.context.IO
 }

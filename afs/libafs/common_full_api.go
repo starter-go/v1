@@ -13,19 +13,40 @@ func (inst *innerCommonFullAPIImpl) _impl() implementation.FileSystemAPI {
 	return inst
 }
 
+// LoadMeta implements implementation.FileSystemAPI.
+func (inst *innerCommonFullAPIImpl) LoadMeta(node afs.Node) afs.Meta {
+
+	// 委托给  platform-api
+
+	panic("unimplemented")
+}
+
+// NormalizePath implements implementation.FileSystemAPI.
+func (inst *innerCommonFullAPIImpl) NormalizePath(path afs.Path) (afs.Path, afs.PathElementList, error) {
+
+	// 委托给  platform-api
+
+	panic("unimplemented")
+}
+
+// NormalizePathEL implements implementation.FileSystemAPI.
+func (inst *innerCommonFullAPIImpl) NormalizePathEL(elements afs.PathElementList) (afs.Path, afs.PathElementList, error) {
+
+	// 委托给  platform-api
+
+	panic("unimplemented")
+}
+
 func (inst *innerCommonFullAPIImpl) GetContext() *implementation.Context {
 	return inst.context
 }
 
 func (inst *innerCommonFullAPIImpl) ListRoots() []afs.Path {
 
+	// 委托给  platform-api
+
 	//todo ...
 	return nil
-}
-
-func (inst *innerCommonFullAPIImpl) NormalizePath(path afs.Path) afs.Path {
-	//todo ...
-	return ""
 }
 
 func (inst *innerCommonFullAPIImpl) PathToUri(path afs.Path) afs.URI {

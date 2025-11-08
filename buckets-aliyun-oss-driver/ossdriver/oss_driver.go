@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/aliyun/alibabacloud-oss-go-sdk-v2/oss"
+	"github.com/starter-go/base/lang"
 	"github.com/starter-go/v1/buckets"
 )
 
@@ -56,21 +57,47 @@ func (inst *innerOSSObject) Exists() (bool, error) {
 	return client.IsObjectExist(ctx, bucketName, objectKey)
 }
 
-func (inst *innerOSSObject) Fetch() (*buckets.ObjectMeta, *buckets.ObjectData, error) {
+func (inst *innerOSSObject) Fetch(fc *buckets.FetchContext) error {
 	// Placeholder implementation
 	// In a complete implementation, this would fetch the object data from OSS
 
-	client := inst.bucket.client
-	meta := &buckets.ObjectMeta{}
-	data := &buckets.ObjectData{}
-	return meta, data, nil
+	cc := fc.Context
+	cc = inst.prepareContext(cc)
+
+	// client := inst.bucket.client
+	// meta := &buckets.ObjectMeta{}
+	// data := &buckets.ObjectData{}
+
+	// todo ...
+
+	return nil
 }
 
-func (inst *innerOSSObject) Put(meta *buckets.ObjectMeta, data *buckets.ObjectData) error {
-	// Placeholder implementation
-	// In a complete implementation, this would put the object data to OSS
+func (inst *innerOSSObject) Put(pc *buckets.PutContext) error {
 
+	cc := pc.Context
 	client := inst.bucket.client
+	req := new(oss.PutObjectRequest)
+	bucket := inst.bucket.name
+
+	cc = inst.prepareContext(cc)
+
+	req.Body = pc.Data.Reader
+	req.Bucket = &bucket
+
+	res, err := client.PutObject(cc, req)
+	if err != nil {
+		pc.Error = err
+		return err
+	}
+
+	ptrMD5 := res.ContentMD5
+	if ptrMD5 != nil {
+		str := *ptrMD5
+		hex := lang.Hex(str)
+		pc.Meta.Sum = hex.Bytes()
+		pc.Meta.Algorithm = buckets.MD5
+	}
 
 	return nil
 }
@@ -88,6 +115,26 @@ func (inst *innerOSSObject) Remove() error {
 
 	_, err := client.DeleteObject(ctx, req)
 	return err
+}
+
+func (inst *innerOSSObject) prepareContext(cc context.Context) context.Context {
+
+	if cc != nil {
+		return cc
+	}
+
+	cc = inst.context
+	if cc != nil {
+		return cc
+	}
+
+	cc = inst.bucket.GetContext()
+	if cc != nil {
+		return cc
+	}
+
+	cc = context.Background()
+	return cc
 }
 
 ////////////////////////////////////////////////////////////////////////////////
