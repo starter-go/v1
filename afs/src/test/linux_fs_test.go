@@ -19,7 +19,7 @@ func TestMain(t *testing.T) {
 	rootNode := fs.GetNode("/")
 	fmt.Printf("Root node exists: %v\n", rootNode.Exists())
 	fmt.Printf("Root node is directory: %v\n", rootNode.IsDir())
-	fmt.Printf("Root node path: %s\n", rootNode.Path())
+	fmt.Printf("Root node path: %s\n", rootNode.GetPath())
 
 	// Test listing roots
 	roots := fs.ListRoots()
@@ -30,10 +30,10 @@ func TestMain(t *testing.T) {
 	fmt.Printf("URI node exists: %v\n", uriNode.Exists())
 
 	// Test file system IO
-	io := fs.IO()
+	io := fs.GetIO()
 	fmt.Printf("File system IO: %v\n", io)
 
 	// Test node IO
-	nodeIO := rootNode.IO()
+	nodeIO := rootNode.GetIO()
 	fmt.Printf("Node IO: %v\n", nodeIO)
 }

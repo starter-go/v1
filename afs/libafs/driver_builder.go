@@ -22,9 +22,9 @@ func (inst *DriverBuilder) Create() afs.Driver {
 	fapi := new(innerCommonFullAPIImpl)
 	fsio := new(innerCommonFSIO)
 
-	if papi == nil {
-		panic("DriverBuilder: PlatformAPI is nil")
-	}
+	driver.context = ctx
+	fs.context = ctx
+	fapi.context = ctx
 
 	ctx.Driver = driver
 	ctx.FS = fs

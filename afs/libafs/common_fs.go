@@ -15,6 +15,7 @@ func (inst *innerCommonFS) _impl() afs.FS {
 
 func (inst *innerCommonFS) GetNode(path afs.Path) afs.Node {
 	nb := new(innerCommonNodeBuilder)
+	nb.context = inst.context
 	nb.init(path)
 	return nb.build()
 }

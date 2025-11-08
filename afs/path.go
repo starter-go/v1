@@ -12,6 +12,8 @@ import (
 // Path 以字符串的形式表示文件系统中的一个路径
 type Path string
 
+const ErrorPath Path = "/log/errors/err"
+
 // 取路径的字符串形式
 func (p Path) String() string {
 	return string(p)

@@ -26,16 +26,21 @@ func (inst *innerCommonNodeBuilder) init(path afs.Path) {
 
 func (inst *innerCommonNodeBuilder) onBuild() error {
 
-	elements := inst.pathElements
-	target, err := elements.Normalize()
+	rawPath := inst.rawPath
+	rawPathEL := inst.pathElements
+	if rawPathEL == nil {
+		rawPathEL = rawPath.Elements()
+	}
+
+	api := inst.context.PlatformAPI
+	path2, plist2, err := api.NormalizePathEL(rawPathEL)
 	if err != nil {
 		return err
 	}
 
-	inst.pathElements = target
-	inst.targetPath = target.Path()
-	inst.simpleName = inst.getSimpleName(target)
-
+	inst.pathElements = plist2
+	inst.targetPath = path2
+	inst.simpleName = inst.getSimpleName(plist2)
 	return nil
 }
 

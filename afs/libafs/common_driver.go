@@ -22,14 +22,15 @@ func (inst *innerCommonDriver) CreateNewFS() afs.FS {
 	ctx1 := inst.context
 	ctx2 := new(implementation.Context)
 	fs2 := new(innerCommonFS)
+	cio := new(innerCommonFSIO)
 
 	fs2.context = ctx2
 
 	ctx2.Driver = ctx1.Driver
 	ctx2.FS = fs2
 	ctx2.FullAPI = ctx1.FullAPI
+	ctx2.IO = cio
 	ctx2.PlatformAPI = ctx1.PlatformAPI
-	ctx2.IO = nil // todo
 
 	return ctx2.FS
 }

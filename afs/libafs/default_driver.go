@@ -4,37 +4,60 @@ import (
 	"github.com/starter-go/v1/afs"
 )
 
-var theDefaultDriver afs.Driver
-
 ////////////////////////////////////////////////////////////////////////////////
 
 // Default 函数是 DefaultFS() 简单别名
 func Default() afs.FS {
-	return DefaultFS()
+	h := &theDefaultFSHolder
+	return h.getFS()
 }
 
 func DefaultFS() afs.FS {
-	driver := DefaultDriver()
-	return driver.GetFS()
+	h := &theDefaultFSHolder
+	return h.getFS()
 }
 
 func DefaultDriver() afs.Driver {
-	driver := theDefaultDriver
-	if driver == nil {
-		driver = innerLoadDefaultDriver()
-		theDefaultDriver = driver
-	}
-	return driver
+	h := &theDefaultFSHolder
+	return h.getDriver()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-func innerLoadDefaultDriver() afs.Driver {
+var theDefaultFSHolder innerDefaultFSHolder
+
+type innerDefaultFSHolder struct {
+	fs     afs.FS
+	driver afs.Driver
+}
+
+func (inst *innerDefaultFSHolder) loadDriver() afs.Driver {
 	builder := new(DriverBuilder)
 	builder.PlatformAPI = createNewPlatformAPI()
 	return builder.Create()
 }
 
-// func createNewPlatformAPI() implementation.PlatformAPI {}
+func (inst *innerDefaultFSHolder) loadFS() afs.FS {
+	dr := inst.getDriver()
+	return dr.GetFS()
+}
+
+func (inst *innerDefaultFSHolder) getFS() afs.FS {
+	fs := inst.fs
+	if fs == nil {
+		fs = inst.loadFS()
+		inst.fs = fs
+	}
+	return fs
+}
+
+func (inst *innerDefaultFSHolder) getDriver() afs.Driver {
+	dr := inst.driver
+	if dr == nil {
+		dr = inst.loadDriver()
+		inst.driver = dr
+	}
+	return dr
+}
 
 ////////////////////////////////////////////////////////////////////////////////
