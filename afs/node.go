@@ -14,6 +14,10 @@ type Node interface {
 
 	GetParent() Directory
 
+	ListParents() []Directory
+
+	CountParents() int
+
 	GetFileSystem() FileSystem
 
 	IsDir() bool

@@ -82,6 +82,29 @@ func (inst *innerCommonNode) _impl() (afs.Node, afs.File, afs.Directory, afs.Lin
 	return inst, inst, inst, inst
 }
 
+// CountParents implements afs.Node.
+func (inst *innerCommonNode) CountParents() int {
+	elist := inst.path.Elements()
+	return len(elist) - 1
+}
+
+// ListParents implements afs.Node.
+func (inst *innerCommonNode) ListParents() []afs.Directory {
+
+	count := inst.CountParents()
+	list := make([]afs.Directory, count)
+	parent := inst.GetParent()
+
+	for i := 0; i < count; i++ {
+		if parent != nil {
+			list[i] = parent
+			parent = parent.GetParent()
+		}
+	}
+
+	return list
+}
+
 // GetNameSuffix implements afs.File.
 func (inst *innerCommonNode) GetNameSuffix() string {
 	str := inst.simpleName.String()
