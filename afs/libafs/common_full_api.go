@@ -2,6 +2,7 @@ package libafs
 
 import (
 	"strings"
+	"time"
 
 	"github.com/starter-go/v1/afs"
 	"github.com/starter-go/v1/afs/implementation"
@@ -9,6 +10,13 @@ import (
 
 type innerCommonFullAPIImpl struct {
 	context *implementation.Context
+}
+
+// SetNodeCreatedAt implements implementation.FileSystemAPI.
+func (inst *innerCommonFullAPIImpl) SetNodeCreatedAt(node afs.Node, t time.Time) error {
+	// 委托给  platform-api
+	api := inst.context.PlatformAPI
+	return api.SetNodeCreatedAt(node, t)
 }
 
 func (inst *innerCommonFullAPIImpl) _impl() implementation.FileSystemAPI {

@@ -1,6 +1,10 @@
 package implementation
 
-import "github.com/starter-go/v1/afs"
+import (
+	"time"
+
+	"github.com/starter-go/v1/afs"
+)
 
 // 表示系统平台特殊的接口
 type PlatformAPI interface {
@@ -11,6 +15,8 @@ type PlatformAPI interface {
 	LoadMeta(node afs.Node) afs.Meta
 
 	ListRoots() []afs.Path
+
+	SetNodeCreatedAt(node afs.Node, t time.Time) error
 }
 
 // 表示通用的接口

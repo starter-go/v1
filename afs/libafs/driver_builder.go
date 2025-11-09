@@ -24,6 +24,7 @@ func (inst *DriverBuilder) Create() afs.Driver {
 
 	driver.context = ctx
 	fs.context = ctx
+	fsio.context = ctx
 	fapi.context = ctx
 
 	ctx.Driver = driver

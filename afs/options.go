@@ -6,11 +6,13 @@ type Options struct {
 	// 文件模式
 	Mode FileMode
 
-	// 读写标志位
+	// 读写标志位 (value like: 'os.O_RDONLY')
 	Flag int
 
-	Owner UserID
+	// -1 表示为空
+	User UserID
 
+	// -1 表示为空
 	Group GroupID
 
 	// 指示操作不要使用缓存

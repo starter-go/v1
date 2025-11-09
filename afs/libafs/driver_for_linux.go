@@ -1,6 +1,7 @@
 package libafs
 
 import (
+	"fmt"
 	"os"
 	"syscall"
 	"time"
@@ -18,6 +19,13 @@ func createNewPlatformAPI() implementation.PlatformAPI {
 ////////////////////////////////////////////////////////////////////////////////
 
 type innerLinuxPlatformAPI struct{}
+
+// SetNodeCreatedAt implements implementation.PlatformAPI.
+func (inst *innerLinuxPlatformAPI) SetNodeCreatedAt(node afs.Node, t time.Time) error {
+	// syscall. Utimes (   )
+	// panic("unimplemented")
+	return fmt.Errorf("linux 不支持这个操作")
+}
 
 // ListRoots implements implementation.PlatformAPI.
 func (inst *innerLinuxPlatformAPI) ListRoots() []afs.Path {

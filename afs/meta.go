@@ -1,17 +1,14 @@
 package afs
 
 import (
-	"os"
 	"time"
 )
 
 type FileSize int64
 
-type FileMode = os.FileMode
+type UserID int
 
-type UserID int32
-
-type GroupID int32
+type GroupID int
 
 ////////////////////////////////////////////////////////////////////////////////
 
