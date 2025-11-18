@@ -1,6 +1,7 @@
 package platforms
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 )
@@ -14,6 +15,8 @@ type Platform interface {
 
 	OS() OST
 
+	OSName() OperatingSystemName
+
 	OSVersion() OperatingSystemVersion
 
 	OSRevision() OperatingSystemRevision
@@ -25,9 +28,13 @@ type Info = Platform
 
 type InfoBuilder struct {
 	Arch ArchName
-	OST  OperatingSystemType
-	OSV  OperatingSystemVersion
-	OSR  OperatingSystemRevision
+
+	OST OperatingSystemType
+	OSN OperatingSystemName
+	OSV OperatingSystemVersion
+	OSR OperatingSystemRevision
+
+	props map[string]string
 }
 
 func (inst *InfoBuilder) Info() Info {
@@ -36,19 +43,50 @@ func (inst *InfoBuilder) Info() Info {
 
 	info.arch = inst.Arch
 	info.ost = inst.OST
+	info.osn = inst.OSN
 	info.osr = inst.OSR
 	info.osv = inst.OSV
+	info.props = inst.props
 
 	return info
+}
+
+func (inst *InfoBuilder) String() string {
+	const (
+		prefix = "  "
+		indent = "\t"
+	)
+	bin, err := json.MarshalIndent(inst, prefix, indent)
+	if err != nil {
+		return err.Error()
+	}
+	return string(bin)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+type InfoLoader interface {
+	Load() Info
+
+	OnLoad(ib *InfoBuilder) error
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 type innerPlatformInfo struct {
 	arch ArchName
-	ost  OperatingSystemType
-	osv  OperatingSystemVersion
-	osr  OperatingSystemRevision
+
+	ost OperatingSystemType
+	osn OperatingSystemName
+	osv OperatingSystemVersion
+	osr OperatingSystemRevision
+
+	props map[string]string
+}
+
+// OSName implements Platform.
+func (i *innerPlatformInfo) OSName() OperatingSystemName {
+	return i.osn
 }
 
 // Arch implements Platform.
@@ -63,12 +101,12 @@ func (i *innerPlatformInfo) OS() OST {
 
 // OSRevision implements Platform.
 func (i *innerPlatformInfo) OSRevision() OperatingSystemRevision {
-	panic("unimplemented")
+	return i.osr
 }
 
 // OSVersion implements Platform.
 func (i *innerPlatformInfo) OSVersion() OperatingSystemVersion {
-	panic("unimplemented")
+	return i.osv
 }
 
 func (i *innerPlatformInfo) String() string {
@@ -76,12 +114,15 @@ func (i *innerPlatformInfo) String() string {
 	ver := i.osv
 	rev := i.osr
 	ost := i.ost
+	osn := i.osn
 	ar := i.arch
 
 	b := new(strings.Builder)
 
 	b.WriteString("platform:")
 	b.WriteString(ost.Normalize().String())
+	b.WriteString("/")
+	b.WriteString(osn.String())
 	b.WriteString(":")
 	b.WriteString(rev.String())
 	b.WriteString("/")
@@ -90,7 +131,6 @@ func (i *innerPlatformInfo) String() string {
 	b.WriteString(ar.String())
 
 	return b.String()
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -101,8 +141,9 @@ var theCurrentPlatformInfo Platform
 func Current() Platform {
 	info := theCurrentPlatformInfo
 	if info == nil {
-		loader := new(innerCurrentPlatformInfoLoader)
-		info = loader.load()
+		loader1 := new(innerCurrentPlatformInfoLoader)
+		loader2 := loader1.tryInit()
+		info = loader2.Load()
 		theCurrentPlatformInfo = info
 	}
 	return info
