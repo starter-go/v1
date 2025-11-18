@@ -33,9 +33,14 @@ func (inst *AnyTable) Init(tag string, st threads.Strategy) {
 	inst.innerGetTable()
 }
 
-func (inst *AnyTable) Getter() collections.Getter {}
+func (inst *AnyTable) Getter() collections.Getter {
+	panic("no impl")
+}
 
-func (inst *AnyTable) Setter() collections.Setter {}
+func (inst *AnyTable) Setter() collections.Setter {
+
+	panic("no impl")
+}
 
 func (inst *AnyTable) Keys() []string {
 

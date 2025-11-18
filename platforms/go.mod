@@ -1,0 +1,7 @@
+module github.com/starter-go/v1/platforms
+
+go 1.23
+
+require github.com/starter-go/v1/lang v0.9.1 // direct
+
+require github.com/starter-go/base v0.9.11 // indirect

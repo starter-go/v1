@@ -5,6 +5,12 @@ import "github.com/starter-go/v1/lang"
 type Setter interface {
 	Error() error
 
+	// 设置浮点数的精度
+	SetPrecision(prec int)
+
+	// 获取浮点数的精度
+	GetPrecision() int
+
 	SetObject(name string, value any)
 
 	SetInt(name string, value int)
@@ -13,22 +19,22 @@ type Setter interface {
 	SetInt32(name string, value int32)
 	SetInt64(name string, value int64)
 
-	SetUInt(name string, value uint)
-	SetUInt8(name string, value uint8)
-	SetUInt16(name string, value uint16)
-	SetUInt32(name string, value uint32)
-	SetUInt64(name string, value uint64)
+	SetUint(name string, value uint)
+	SetUint8(name string, value uint8)
+	SetUint16(name string, value uint16)
+	SetUint32(name string, value uint32)
+	SetUint64(name string, value uint64)
 
 	SetFloat32(name string, value float32)
 	SetFloat64(name string, value float64)
+
+	SetComplex64(name string, value complex64)
+	SetComplex128(name string, value complex128)
 
 	SetBool(name string, value bool)
 	SetByte(name string, value byte)
 	SetRune(name string, value rune)
 	SetString(name string, value string)
-
-	SetComplex64(name string, value complex64)
-	SetComplex128(name string, value complex128)
 
 	SetHex(name string, value lang.Hex)
 	SetBase64(name string, value lang.Base64)

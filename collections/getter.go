@@ -17,11 +17,11 @@ type Getter interface {
 	GetInt32(name string, valueDefault ...int32) int32
 	GetInt64(name string, valueDefault ...int64) int64
 
-	GetUInt(name string, valueDefault ...uint) uint
-	GetUInt8(name string, valueDefault ...uint8) uint8
-	GetUInt16(name string, valueDefault ...uint16) uint16
-	GetUInt32(name string, valueDefault ...uint32) uint32
-	GetUInt64(name string, valueDefault ...uint64) uint64
+	GetUint(name string, valueDefault ...uint) uint
+	GetUint8(name string, valueDefault ...uint8) uint8
+	GetUint16(name string, valueDefault ...uint16) uint16
+	GetUint32(name string, valueDefault ...uint32) uint32
+	GetUint64(name string, valueDefault ...uint64) uint64
 
 	GetFloat32(name string, valueDefault ...float32) float32
 	GetFloat64(name string, valueDefault ...float64) float64
