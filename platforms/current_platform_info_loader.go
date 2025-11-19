@@ -11,10 +11,7 @@ type innerCurrentPlatformInfoLoader struct {
 
 // Load implements InfoLoader.
 func (inst *innerCurrentPlatformInfoLoader) Load() Info {
-
-	builder := new(InfoBuilder)
-	inst.OnLoad(builder)
-	return builder.Info()
+	return innerLoadWithLoader(inst)
 }
 
 // OnLoad implements InfoLoader.
@@ -42,6 +39,7 @@ func (inst *innerCurrentPlatformInfoLoader) tryInit() InfoLoader {
 	if list == nil {
 		list = inst.registerSpecialLoaders(list)
 		list = inst.registerCommonLoaders(list)
+		list = inst.registerDefaultRevsionLoader(list)
 		inst.moreLoaders = list
 	}
 	return inst
@@ -54,8 +52,11 @@ func (inst *innerCurrentPlatformInfoLoader) tryInit() InfoLoader {
 
 // 注册通用的加载器
 func (inst *innerCurrentPlatformInfoLoader) registerCommonLoaders(list []InfoLoader) []InfoLoader {
-
 	list = append(list, new(innerCommonPlatformInfoLoader))
+	return list
+}
 
+func (inst *innerCurrentPlatformInfoLoader) registerDefaultRevsionLoader(list []InfoLoader) []InfoLoader {
+	list = append(list, new(innerDefaultRevisionLoader))
 	return list
 }

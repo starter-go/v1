@@ -20,6 +20,8 @@ type Platform interface {
 	OSVersion() OperatingSystemVersion
 
 	OSRevision() OperatingSystemRevision
+
+	GetProperties(dst map[string]string) map[string]string
 }
 
 type Info = Platform
@@ -41,11 +43,11 @@ func (inst *InfoBuilder) Info() Info {
 
 	info := new(innerPlatformInfo)
 
-	info.arch = inst.Arch
-	info.ost = inst.OST
-	info.osn = inst.OSN
+	info.arch = inst.Arch.Normalize()
+	info.ost = inst.OST.Normalize()
+	info.osn = inst.OSN.Normalize()
 	info.osr = inst.OSR
-	info.osv = inst.OSV
+	info.osv = inst.OSV.Normalize()
 	info.props = inst.props
 
 	return info
@@ -82,6 +84,21 @@ type innerPlatformInfo struct {
 	osr OperatingSystemRevision
 
 	props map[string]string
+}
+
+// GetProperties implements Platform.
+func (inst *innerPlatformInfo) GetProperties(dst map[string]string) map[string]string {
+	src := inst.props
+	if src == nil {
+		src = make(map[string]string)
+	}
+	if dst == nil {
+		dst = make(map[string]string)
+	}
+	for k, v := range src {
+		dst[k] = v
+	}
+	return dst
 }
 
 // OSName implements Platform.
@@ -131,6 +148,16 @@ func (i *innerPlatformInfo) String() string {
 	b.WriteString(ar.String())
 
 	return b.String()
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+func innerLoadWithLoader(loader InfoLoader) Info {
+	ib := new(InfoBuilder)
+	if loader != nil {
+		loader.OnLoad(ib)
+	}
+	return ib.Info()
 }
 
 ////////////////////////////////////////////////////////////////////////////////

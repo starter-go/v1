@@ -1,0 +1,21 @@
+
+properties:
+
+	 BUG_REPORT_URL = "https://bugs.launchpad.net/ubuntu/"
+	 HOME_URL = "https://www.ubuntu.com/"
+	 ID = ubuntu
+	 ID_LIKE = debian
+	 LOGO = ubuntu-logo
+	 NAME = "Ubuntu"
+	 PRETTY_NAME = "Ubuntu 24.04 LTS"
+	 PRIVACY_POLICY_URL = "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+	 SUPPORT_URL = "https://help.ubuntu.com/"
+	 UBUNTU_CODENAME = noble
+	 VERSION = "24.04 LTS (Noble Numbat)"
+	 VERSION_CODENAME = noble
+	 VERSION_ID = "24.04"
+	 test-date = 2025-11-19 18:11:16.155 +0800 CST
+	 test-module = module:github.com/starter-go/v1/platforms@v0.9.1-r1
+	 test-platform = platform:linux/ubuntu:24004/24.04?arch=amd64
+
+filename: log_at_linux_ubuntu_r24004_v24.04_amd64.txt

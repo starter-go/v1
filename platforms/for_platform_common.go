@@ -9,9 +9,7 @@ type innerCommonPlatformInfoLoader struct {
 
 // Load implements InfoLoader.
 func (inst *innerCommonPlatformInfoLoader) Load() Info {
-	ib := new(InfoBuilder)
-	inst.OnLoad(ib)
-	return ib.Info()
+	return innerLoadWithLoader(inst)
 }
 
 // OnLoad implements InfoLoader.

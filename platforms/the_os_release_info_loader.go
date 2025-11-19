@@ -13,9 +13,7 @@ type innerLinuxOSReleaseInfoLoader struct {
 
 // Load implements InfoLoader.
 func (inst *innerLinuxOSReleaseInfoLoader) Load() Info {
-	ib := new(InfoBuilder)
-	inst.OnLoad(ib)
-	return ib.Info()
+	return innerLoadWithLoader(inst)
 }
 
 // OnLoad implements InfoLoader.
@@ -65,6 +63,7 @@ func (inst *innerLinuxOSReleaseInfoLoader) parseRawData(raw []byte) map[string]s
 		}
 		name := strings.TrimSpace(parts[0])
 		value := strings.TrimSpace(parts[1])
+		name = strings.ToUpper(name)
 		table[name] = value
 	}
 

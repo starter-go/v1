@@ -77,10 +77,6 @@ func (ost OperatingSystemType) String() string {
 
 func (ost OperatingSystemType) Normalize() OperatingSystemType {
 
-	// m1 := ost.Major()
-	// m2 := ost.Minor()
-	// str := strings.TrimSpace(m1) + "/" + strings.TrimSpace(m2)
-
 	str := ost.String()
 	str = strings.TrimSpace(str)
 	str = strings.ToLower(str)
@@ -91,6 +87,14 @@ func (ost OperatingSystemType) Normalize() OperatingSystemType {
 
 func (name OperatingSystemName) String() string {
 	return string(name)
+}
+
+func (name OperatingSystemName) Normalize() OperatingSystemName {
+
+	str := name.String()
+	str = strings.TrimSpace(str)
+	str = strings.ToLower(str)
+	return OperatingSystemName(str)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
