@@ -1,0 +1,15 @@
+
+properties:
+         BUG_REPORT_URL = "https://club.uniontech.com"
+         HOME_URL = "https://www.chinauos.com/"
+         ID = uos
+         NAME = "uos"
+         PRETTY_NAME = "UnionTech OS Desktop 20 Home"
+         VERSION = "20"
+         VERSION_CODENAME = eagle
+         VERSION_ID = "20"
+         test-date = 2025-11-19 23:03:38.566 +0800 CST
+         test-module = module:github.com/starter-go/v1/platforms@v0.9.1-r1
+         test-platform = platform:linux/uos:20/20?arch=amd64
+
+filename: log_at_linux_uos_r20_v20_amd64.txt
