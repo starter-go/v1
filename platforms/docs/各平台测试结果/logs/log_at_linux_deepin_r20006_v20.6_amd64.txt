@@ -1,0 +1,15 @@
+
+properties:
+         BUG_REPORT_URL = "https://bbs.deepin.org/"
+         HOME_URL = "https://www.deepin.org/"
+         ID = Deepin
+         NAME = "Deepin"
+         PRETTY_NAME = "Deepin 20.6"
+         VERSION = "20.6"
+         VERSION_CODENAME = "apricot"
+         VERSION_ID = "20.6"
+         test-date = 2025-11-19 18:28:14.41 +0800 CST
+         test-module = module:github.com/starter-go/v1/platforms@v0.9.1-r1
+         test-platform = platform:linux/deepin:20006/20.6?arch=amd64
+
+filename: log_at_linux_deepin_r20006_v20.6_amd64.txt
