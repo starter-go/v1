@@ -1,0 +1,29 @@
+
+properties:
+	 ANSI_COLOR = "0;38;2;60;110;180"
+	 BUG_REPORT_URL = "https://bugzilla.redhat.com/"
+	 CPE_NAME = "cpe:/o:fedoraproject:fedora:43"
+	 DEFAULT_HOSTNAME = "fedora"
+	 DOCUMENTATION_URL = "https://docs.fedoraproject.org/en-US/fedora/f43/"
+	 HOME_URL = "https://fedoraproject.org/"
+	 ID = fedora
+	 LOGO = fedora-logo-icon
+	 NAME = "Fedora Linux"
+	 PRETTY_NAME = "Fedora Linux 43 (Workstation Edition)"
+	 REDHAT_BUGZILLA_PRODUCT = "Fedora"
+	 REDHAT_BUGZILLA_PRODUCT_VERSION = 43
+	 REDHAT_SUPPORT_PRODUCT = "Fedora"
+	 REDHAT_SUPPORT_PRODUCT_VERSION = 43
+	 RELEASE_TYPE = stable
+	 SUPPORT_END = 2026-12-02
+	 SUPPORT_URL = "https://ask.fedoraproject.org/"
+	 VARIANT = "Workstation Edition"
+	 VARIANT_ID = workstation
+	 VERSION = "43 (Workstation Edition)"
+	 VERSION_CODENAME = ""
+	 VERSION_ID = 43
+	 test-date = 2025-11-19 22:14:55.868 +0800 CST
+	 test-module = module:github.com/starter-go/v1/platforms@v0.9.1-r1
+	 test-platform = platform:linux/fedora:43/43?arch=amd64
+
+filename: log_at_linux_fedora_r43_v43_amd64.txt
