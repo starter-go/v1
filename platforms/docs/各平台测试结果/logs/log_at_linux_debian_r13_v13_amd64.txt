@@ -1,0 +1,17 @@
+
+properties:
+	 BUG_REPORT_URL = "https://bugs.debian.org/"
+	 DEBIAN_VERSION_FULL = 13.2
+	 HOME_URL = "https://www.debian.org/"
+	 ID = debian
+	 NAME = "Debian GNU/Linux"
+	 PRETTY_NAME = "Debian GNU/Linux 13 (trixie)"
+	 SUPPORT_URL = "https://www.debian.org/support"
+	 VERSION = "13 (trixie)"
+	 VERSION_CODENAME = trixie
+	 VERSION_ID = "13"
+	 test-date = 2025-11-22 11:20:04.793 +0800 CST
+	 test-module = module:github.com/starter-go/v1/platforms@v0.9.1-r1
+	 test-platform = platform:linux/debian:13/13?arch=amd64
+
+filename: log_at_linux_debian_r13_v13_amd64.txt
