@@ -1,0 +1,19 @@
+
+properties:
+	 BUG_REPORT_URL = "http://linuxmint-troubleshooting-guide.readthedocs.io/en/latest/"
+	 HOME_URL = "https://www.linuxmint.com/"
+	 ID = linuxmint
+	 ID_LIKE = "ubuntu debian"
+	 NAME = "Linux Mint"
+	 PRETTY_NAME = "Linux Mint 22.2"
+	 PRIVACY_POLICY_URL = "https://www.linuxmint.com/"
+	 SUPPORT_URL = "https://forums.linuxmint.com/"
+	 UBUNTU_CODENAME = noble
+	 VERSION = "22.2 (Zara)"
+	 VERSION_CODENAME = zara
+	 VERSION_ID = "22.2"
+	 test-date = 2025-11-22 23:01:13.845 +0800 CST
+	 test-module = module:github.com/starter-go/v1/platforms@v0.9.1-r1
+	 test-platform = platform:linux/linuxmint:22002/22.2?arch=amd64
+
+filename: log_at_linux_linuxmint_r22002_v22.2_amd64.txt
