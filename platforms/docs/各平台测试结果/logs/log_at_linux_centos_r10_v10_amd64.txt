@@ -1,0 +1,23 @@
+
+properties:
+	 ANSI_COLOR = "0;31"
+	 BUG_REPORT_URL = "https://issues.redhat.com/"
+	 CPE_NAME = "cpe:/o:centos:centos:10"
+	 HOME_URL = "https://centos.org/"
+	 ID = "centos"
+	 ID_LIKE = "rhel fedora"
+	 LOGO = "fedora-logo-icon"
+	 NAME = "CentOS Stream"
+	 PLATFORM_ID = "platform:el10"
+	 PRETTY_NAME = "CentOS Stream 10 (Coughlan)"
+	 REDHAT_SUPPORT_PRODUCT = "Red Hat Enterprise Linux 10"
+	 REDHAT_SUPPORT_PRODUCT_VERSION = "CentOS Stream"
+	 VENDOR_NAME = "CentOS"
+	 VENDOR_URL = "https://centos.org/"
+	 VERSION = "10 (Coughlan)"
+	 VERSION_ID = "10"
+	 test-date = 2025-11-25 20:31:48.527 +0800 CST
+	 test-module = module:github.com/starter-go/v1/platforms@v0.9.1-r1
+	 test-platform = platform:linux/centos:10/10?arch=amd64
+
+filename: log_at_linux_centos_r10_v10_amd64.txt
