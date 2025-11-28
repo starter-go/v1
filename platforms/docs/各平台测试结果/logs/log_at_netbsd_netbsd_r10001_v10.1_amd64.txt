@@ -1,0 +1,33 @@
+
+uname output string:  NetBSD netbsd.djaf.host.192.168.0.1 10.1 NetBSD 10.1 (GENERIC) #0: Mon Dec 16 13:08:11 UTC 2024  mkrepro@mkrepro.NetBSD.org:/usr/src/sys/arch/amd64/compile/GENERIC amd64
+
+  part[0] = NetBSD
+  part[1] = netbsd.djaf.host.192.168.0.1
+  part[2] = 10.1
+  part[3] = NetBSD
+  part[4] = 10.1
+  part[5] = (GENERIC)
+  part[6] = #0:
+  part[7] = Mon
+  part[8] = Dec
+  part[9] = 16
+  part[10] = 13:08:11
+  part[11] = UTC
+  part[12] = 2024
+  part[13] = 
+  part[14] = mkrepro@mkrepro.NetBSD.org:/usr/src/sys/arch/amd64/compile/GENERIC
+  part[15] = amd64
+  part[16] = 
+
+
+properties:
+	 test-date = 2025-11-28 14:33:22.323 +0800 CST
+	 test-module = module:github.com/starter-go/v1/platforms@v0.9.1-r1
+	 test-platform = platform:netbsd/netbsd:10001/10.1?arch=amd64
+	 uname.kernel-name = NetBSD
+	 uname.kernel-release = 10.1
+	 uname.kernel-version = NetBSD
+	 uname.machine = 10.1
+	 uname.nodename = netbsd.djaf.host.192.168.0.1
+
+filename: log_at_netbsd_netbsd_r10001_v10.1_amd64.txt
