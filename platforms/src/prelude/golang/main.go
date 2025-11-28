@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"runtime"
 	"sort"
 	"strconv"
@@ -15,6 +16,11 @@ func main() {
 	goos := runtime.GOOS
 	goar := runtime.GOARCH
 
+	exefile, err := os.Executable()
+	if err != nil {
+		exefile = err.Error()
+	}
+
 	// properties
 	props := make(map[string]string)
 	props["module.str"] = mod.String()
@@ -25,6 +31,7 @@ func main() {
 
 	props["runtime.goos"] = goos
 	props["runtime.goarch"] = goar
+	props["os.executable"] = exefile
 
 	keys := make([]string, 0)
 	for k := range props {

@@ -65,6 +65,23 @@ func (inst *InfoBuilder) String() string {
 	return string(bin)
 }
 
+func (inst *InfoBuilder) SetProperty(name, value string) {
+	table := inst.props
+	if table == nil {
+		table = make(map[string]string)
+		inst.props = table
+	}
+	table[name] = value
+}
+
+func (inst *InfoBuilder) GetProperty(name string) string {
+	table := inst.props
+	if table == nil {
+		return ""
+	}
+	return table[name]
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 type InfoLoader interface {

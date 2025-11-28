@@ -57,6 +57,13 @@ func (inst *innerCurrentPlatformInfoLoader) registerCommonLoaders(list []InfoLoa
 }
 
 func (inst *innerCurrentPlatformInfoLoader) registerDefaultRevsionLoader(list []InfoLoader) []InfoLoader {
+
+	// tmp for test
+	// unameLoader := new(innerUnameInfoLoader)
+	// unameLoader.init()
+	// list = append(list, unameLoader)
+
 	list = append(list, new(innerDefaultRevisionLoader))
+
 	return list
 }
